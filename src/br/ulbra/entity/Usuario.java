@@ -27,6 +27,10 @@ public class Usuario {
     private String estadousu;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    public Usuario() {
+
+    }
+
     public Usuario(int pkidusu, String nomeusu, String emailusu, String senhausu, String foneusu, String cpfusu, String cepusu, String logradourousu, String numerousu, String bairrousu, String cidadeusu, String estadousu) {
         this.pkidusu = pkidusu;
         this.nomeusu = nomeusu;
@@ -152,6 +156,7 @@ public class Usuario {
         } else {
             return false;
         }
+
     }
 
     /*
@@ -179,7 +184,10 @@ public class Usuario {
             return false;
         }
     }
-    */
+     */
 
-   
+    @Override
+    public String toString() {
+        return "Usuario{" + "pkidusu=" + pkidusu + ", nomeusu=" + nomeusu + ", emailusu=" + emailusu + ", senhausu=" + senhausu + ", foneusu=" + foneusu + ", cpfusu=" + cpfusu + ", cepusu=" + cepusu + ", logradourousu=" + logradourousu + ", numerousu=" + numerousu + ", bairrousu=" + bairrousu + ", cidadeusu=" + cidadeusu + ", estadousu=" + estadousu + ", additionalProperties=" + additionalProperties + '}';
+    }
 }

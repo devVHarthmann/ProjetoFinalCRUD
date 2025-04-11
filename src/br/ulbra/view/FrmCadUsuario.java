@@ -5,6 +5,15 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.dao.UsuarioDAO;
+import br.ulbra.entity.IntegracaoAPI;
+import br.ulbra.entity.IntegracaoAPI.EnderecoCompleto;
+import br.ulbra.entity.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
@@ -48,7 +57,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtEmail1 = new javax.swing.JTextField();
+        txtFone = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -90,6 +99,11 @@ public class FrmCadUsuario extends javax.swing.JFrame {
 
         btnRegistrarCad.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         btnRegistrarCad.setText("Registrar");
+        btnRegistrarCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarCadActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         jLabel4.setText("Nome");
@@ -116,7 +130,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         jLabel11.setText("CEP");
 
-        txtEmail1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        txtFone.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         jLabel13.setText("Fone");
@@ -148,6 +162,11 @@ public class FrmCadUsuario extends javax.swing.JFrame {
 
         btmBuscarCep.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         btmBuscarCep.setText("Buscar CEP");
+        btmBuscarCep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btmBuscarCepActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +205,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(txtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                             .addComponent(jLabel16)
-                            .addComponent(txtEmail1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                            .addComponent(txtFone, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                             .addComponent(jLabel13)
                             .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                             .addComponent(jLabel10)
@@ -258,7 +277,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,7 +287,61 @@ public class FrmCadUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    Usuario u;
+    private void btmBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmBuscarCepActionPerformed
 
+      String cep = txtCEP.getText(); // CEP de exemplo
+
+        UsuarioDAO dao = null;
+        try {
+            dao = new UsuarioDAO();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmCadUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+
+        String json = IntegracaoAPI.buscarEnderecoPorCep(cep);
+        if (json != null) {
+            EnderecoCompleto enderecoCompleto = IntegracaoAPI.converterJsonParaEndereco(json);
+              
+            //txtEnd.setText(enderecoCompleto.toString());
+           // Endereco e = new Endereco();
+            txtLogradouro.setText(enderecoCompleto.logradouro);
+            txtNumero.setText(txtNumero.getText());
+            txtCidade.setText(enderecoCompleto.localidade);
+            txtBairro.setText(enderecoCompleto.bairro);
+            txtEstado.setText(enderecoCompleto.uf);
+            
+        } else {
+            System.out.println("❌ Falha ao consultar o CEP!");
+        }
+    }//GEN-LAST:event_btmBuscarCepActionPerformed
+
+    private void btnRegistrarCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCadActionPerformed
+        u = new Usuario();
+        try {
+            UsuarioDAO ud = new UsuarioDAO();
+            u.setNomeusu(txtNome.getText());
+            u.setSenhausu(txtSenha.getText());
+            u.setEmailusu(txtEmail.getText());       
+            u.setFoneusu(txtFone.getText());
+            u.setNumerousu(txtNumero.getText());
+            u.setSenhausu(txtSenha.getText());
+            u.setCpfusu(txtCPF.getText());
+            u.setCepusu(txtCEP.getText());
+            u.setLogradourousu(txtLogradouro.getText());
+            u.setCidadeusu(txtCidade.getText());
+            u.setEstadousu(txtEstado.getText());
+            u.setBairrousu(txtBairro.getText());
+            
+            
+            ud.create(u);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro:"+ex.getMessage()
+        );
+    }//GEN-LAST:event_btnRegistrarCadActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -333,8 +406,8 @@ public class FrmCadUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JPasswordField txtConfirmarSenha;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEmail1;
     private javax.swing.JTextField txtEstado;
+    private javax.swing.JTextField txtFone;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
