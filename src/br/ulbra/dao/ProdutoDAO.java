@@ -4,7 +4,12 @@ import br.ulbra.config.ConnectionFactory;
 import br.ulbra.entity.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ProdutoDAO {
@@ -32,5 +37,31 @@ public class ProdutoDAO {
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+     public ArrayList<Produto> read() {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Produto> prods = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM tbProduto");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Produto pro = new Produto();
+                pro.setNomeProd(rs.getString("nomeprod"));
+                pro.setCategoriaProd(rs.getString("categoriaProd"));
+                pro.setQuantEstoqueProd(rs.getInt("quantEstoqueProd"));
+                pro.setValorUnitProd((int) rs.getDouble("valorUnitProd"));
+                pro.setDataCadProd(rs.getString("dataCadProd"));
+                prods.add(pro);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return (ArrayList<Produto>) prods;
     }
 }

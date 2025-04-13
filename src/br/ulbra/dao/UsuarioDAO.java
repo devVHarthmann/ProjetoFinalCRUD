@@ -2,10 +2,17 @@ package br.ulbra.dao;
 
 import br.ulbra.config.ConnectionFactory;
 import br.ulbra.entity.Usuario;
+import br.ulbra.view.FrmListaUsu;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
@@ -68,7 +75,7 @@ public class UsuarioDAO {
         ResultSet rs = null;
         boolean check = false;
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbusuarios WHERE and senhaUsu = ?");
+            stmt = con.prepareStatement("SELECT * FROM tbusuario WHERE and senhaUsu = ?");
             stmt.setString(1, senha);
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -80,6 +87,32 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return check;
+    }
+
+    public ArrayList<Usuario> read() {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM tbUsuario");
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Usuario usu = new Usuario();
+                usu.setNomeusu(rs.getString("nomeusu"));
+                usu.setEmailusu(rs.getString("emailusu"));
+                usu.setFoneusu(rs.getString("foneusu"));
+                usu.setCpfusu(rs.getString("cpfusu"));
+                usuarios.add(usu);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return (ArrayList<Usuario>) usuarios;
     }
 
 }

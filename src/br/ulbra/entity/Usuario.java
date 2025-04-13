@@ -159,23 +159,19 @@ public class Usuario {
 
     }
 
-    /*
     public boolean testeSenha(String senha) {
-        Pattern pattern1 = Pattern.compile("[^a-zA-Z0-9]", Pattern.CASE_INSENSITIVE);
-        Pattern pattern2 = Pattern.compile("[A-Z)]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern1.matcher(senha);
-        Pattern pattern3 = Pattern.compile("[a-z)]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher3 = pattern3.matcher(senha);
-        Pattern pattern4 = Pattern.compile("[0-9)]", Pattern.CASE_INSENSITIVE);
-        Matcher matcher4 = pattern4.matcher(senha);
-        Matcher matcher2 = pattern2.matcher(senha);
-        boolean matchfound = matcher.find();
-        boolean matchfound2 = matcher2.find();
-        boolean matchfound3 = matcher3.find();
-        boolean matchfound4 = matcher4.find();
+        Pattern especiais = Pattern.compile("[^a-zA-Z0-9]");
+        Pattern maiusculas = Pattern.compile("[A-Z]");
+        Pattern minusculas = Pattern.compile("[a-z]");
+        Pattern numeros = Pattern.compile("[0-9]");
+
+        boolean temEspecial = especiais.matcher(senha).find();
+        boolean temMaiuscula = maiusculas.matcher(senha).find();
+        boolean temMinuscula = minusculas.matcher(senha).find();
+        boolean temNumero = numeros.matcher(senha).find();
         boolean result = false;
 
-        if (matchfound2 == true && matchfound == true && matchfound3 == true & & matchfound4 == true &&  == false) {
+        if (temEspecial == true && temMaiuscula == true && temMinuscula == true && temNumero == true) {
             result = true;
         }
         if (senha.length() >= 8) {
@@ -184,7 +180,6 @@ public class Usuario {
             return false;
         }
     }
-     */
 
     @Override
     public String toString() {

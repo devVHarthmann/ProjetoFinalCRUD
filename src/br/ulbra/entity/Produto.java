@@ -20,6 +20,10 @@ public class Produto {
         this.valorUnitProd = valorUnitProd;
         this.quantEstoqueProd = quantEstoqueProd;
     }
+    
+    public double calcularEstoque(){
+        return (this.valorUnitProd * this.quantEstoqueProd);
+    }
 
     public int getIdProd() {
         return idProd;
