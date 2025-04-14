@@ -29,6 +29,7 @@ public class FrmCadProd extends javax.swing.JFrame {
      */
     public FrmCadProd() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -52,7 +53,7 @@ public class FrmCadProd extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnCalcEstoque = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtProduto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -202,7 +203,7 @@ public class FrmCadProd extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorUnitProdActionPerformed
 
     private void btnCalcEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcEstoqueActionPerformed
-        JOptionPane.showMessageDialog(null, "Valor total de "+p.getNomeProd()+ " no estoque é " + p.calcularEstoque());
+        JOptionPane.showMessageDialog(null, "Valor total de "+p.getNomeProd()+ " no estoque é R$ " + p.calcularEstoque());
     }//GEN-LAST:event_btnCalcEstoqueActionPerformed
 
     /**

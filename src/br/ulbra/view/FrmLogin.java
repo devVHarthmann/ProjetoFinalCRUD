@@ -6,6 +6,10 @@
 package br.ulbra.view;
 
 import br.ulbra.dao.UsuarioDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +22,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -124,15 +129,25 @@ public class FrmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    UsuarioDAO ud;
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if (ud.checkLogin(txtEmail.getText(), txtSenha.getText())) {
-            this.dispose();
-            new FrmCadUsuario().setVisible(true);
-        } else {
-            this.dispose();
-            new FrmCadUsuario().setVisible(true);
+        UsuarioDAO ud;
+        try {
+            ud = new UsuarioDAO();
+            String usu, senha;
+            usu = txtEmail.getText();
+            senha = txtSenha.getText();
+            if (ud.checkLogin(usu, senha)) {
+                this.dispose();
+                new FrmDashboard().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "E-mail ou Senha Inválidos!!");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed

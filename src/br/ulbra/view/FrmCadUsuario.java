@@ -25,6 +25,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
      */
     public FrmCadUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -84,7 +85,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 24)); // NOI18N
         jLabel12.setText("CEP");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(9000, 90000));
         setResizable(false);
 
@@ -299,7 +300,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
                         .addComponent(txtLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRegistrarCad, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -309,16 +310,16 @@ public class FrmCadUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         pack();
@@ -373,6 +374,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
                     u.setBairrousu(txtBairro.getText());
 
                     ud.create(u);
+                    new FrmDashboard().setVisible(true);
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Erro:" + ex.getMessage());
                 }
@@ -382,7 +384,7 @@ public class FrmCadUsuario extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(null, "Senha precisa conter uma letra maiúscula, uma letra minuscula, um número e um caractere especial");
         }
-        new FrmDashboard().setVisible(true);
+        
 
     }//GEN-LAST:event_btnRegistrarCadActionPerformed
 

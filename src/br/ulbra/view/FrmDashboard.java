@@ -20,6 +20,7 @@ public class FrmDashboard extends javax.swing.JFrame {
      */
     public FrmDashboard() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,7 +47,6 @@ public class FrmDashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu9 = new javax.swing.JMenu();
@@ -87,8 +87,6 @@ public class FrmDashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("jButton1");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/VGH-logo.png"))); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/VGH-logo.png"))); // NOI18N
 
@@ -158,35 +156,28 @@ public class FrmDashboard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel1)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(111, 111, 111)
+                .addComponent(jLabel1)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(131, 131, 131)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadUsuActionPerformed
-        this.dispose();
+        
         new FrmCadUsuario().setVisible(true);
     }//GEN-LAST:event_btnCadUsuActionPerformed
 
     private void btnListaUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaUsuActionPerformed
-        this.dispose();
+        
         try {
             new FrmListaUsu().setVisible(true);
         } catch (SQLException ex) {
@@ -195,17 +186,21 @@ public class FrmDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnListaUsuActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        this.dispose();
+       
         new FrmLogin().setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnListaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaProdActionPerformed
-        this.dispose();
-        new FrmListaProd().setVisible(true);
+        
+        try {
+            new FrmListaProd().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnListaProdActionPerformed
 
     private void btnCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdActionPerformed
-        this.dispose();
+        
         new FrmCadProd().setVisible(true);
     }//GEN-LAST:event_btnCadProdActionPerformed
 
@@ -254,7 +249,6 @@ public class FrmDashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
